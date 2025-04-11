@@ -9,62 +9,106 @@ datasource db {
 }
 
 // Enums
-enum CategoryType {
+enum TransactionType {
   income
   expense
 }
 
 // Models
 model User {
-    id String @id @default(uuid())
-    name String
-    email String
-    hashedPassword String
+  id             String @id @default(uuid())
+  name           String
+  email          String
+  hashedPassword String
 
-    currencyId String
+  currencyId String
+  currency   Currency @relation(fields: [currencyId], references: [id])
 
-    categories Category[]
-    accounts Account[]
+  categories   Category[]
+  accounts     Account[]
+  transactions Transaction[]
+  tags         Tag[]
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@unique([email])
 }
 
-model Currency{
-    id String @id @default(uuid())
-    name String
-    symbol String
+model Currency {
+  id     String @id @default(uuid())
+  name   String
+  symbol String
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+  users User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@unique([name, symbol])
 }
 
-model Account{
-    id String @id @default(uuid())
-    name String
-    icon String
+model Account {
+  id      String @id @default(uuid())
+  name    String
+  icon    String
+  balance Float
 
-    userId String
-    user User @relation(fields: [userId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+  transactions Transaction[]
 
-    @@unique([name, userId])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@unique([name, userId])
 }
 
 model Category {
-    id String @id @default(uuid())
-    name String
-    icon String
-    type CategoryType @default(income)
+  id   String          @id @default(uuid())
+  name String
+  icon String
+  type TransactionType @default(income)
 
-    userId String
-    user User @relation(fields: [userId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+  transactions Transaction[]
 
-    @@unique([name, userId, type])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@unique([name, userId, type])
 }
 
+model Tag {
+  id   String @id @default(uuid())
+  name String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  transactions Transaction[] @relation("TransactionTags")
+}
+
+model Transaction {
+  id          String          @id @default(uuid())
+  description String
+  amount      Float
+  date        DateTime        @default(now())
+  type        TransactionType @default(income)
+  tags        Tag[]           @relation("TransactionTags")
+
+  accountId String
+  account   Account @relation(fields: [accountId], references: [id])
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}

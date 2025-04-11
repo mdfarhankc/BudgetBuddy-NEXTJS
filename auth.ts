@@ -1,8 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { hashPassword } from "@/lib/utils";
-import { ZodError } from "zod";
 import { signInSchema } from "./validations";
+import { getUserFromDb } from "./services/auth";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
@@ -13,20 +12,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             authorize: async (credentials) => {
                 try {
-                    let user = null;
                     const { email, password } = await signInSchema.parseAsync(credentials);
-                    const passwordHash = await hashPassword(password);
-                    
+                    const user = await getUserFromDb(email, password);
                     if (!user) {
-                        throw new Error("Invalid credentials.")
+                        throw new Error("Invalid credentials.");
                     }
                     return user;
                 } catch (error) {
-                    if (error instanceof ZodError) {
-                        return null;
-                    }
+                    console.error("Authorize error:", error);
+                    return null;
                 }
             }
         })
     ],
+    pages: {
+        signIn: "/sign-in",
+        signOut: "/",
+    },
 })
