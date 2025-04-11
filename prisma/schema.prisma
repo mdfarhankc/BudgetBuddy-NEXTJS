@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum CategoryType {
+  income
+  expense
+}
+
+// Models
+model User {
+    id String @id @default(uuid())
+    name String
+    email String
+    hashedPassword String
+
+    currencyId String
+
+    categories Category[]
+    accounts Account[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
+model Currency{
+    id String @id @default(uuid())
+    name String
+    symbol String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
+model Account{
+    id String @id @default(uuid())
+    name String
+    icon String
+
+    userId String
+    user User @relation(fields: [userId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    @@unique([name, userId])
+}
+
+model Category {
+    id String @id @default(uuid())
+    name String
+    icon String
+    type CategoryType @default(income)
+
+    userId String
+    user User @relation(fields: [userId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    @@unique([name, userId, type])
+}
+
