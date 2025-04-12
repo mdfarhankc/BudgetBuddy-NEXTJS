@@ -59,7 +59,7 @@ model Account {
   id      String @id @default(uuid())
   name    String
   icon    String
-  balance Float
+  balance Float @default(0.0)
 
   userId String
   user   User   @relation(fields: [userId], references: [id])

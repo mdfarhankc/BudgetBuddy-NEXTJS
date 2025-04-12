@@ -5,6 +5,7 @@ export const getUserFromDb = async (email: string, password: string) => {
     try {
         const user = await prisma.user.findUnique({
             where: { email },
+            include: { currency: true },
         });
         if (!user) return null;
 

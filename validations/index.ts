@@ -1,5 +1,6 @@
 import { object, string, z } from "zod";
 
+// -------- AUTH -----------------------------
 export const signInSchema = object({
     email: string({ required_error: "Email is required" })
         .min(1, "Email is required")
@@ -33,3 +34,15 @@ export const signUpSchema = object({
 }
 );
 export type SignUpValues = z.infer<typeof signUpSchema>;
+
+
+// ------------------- Account ------------------------
+export const createAccountSchema = object({
+    name: string({ required_error: "Account name is required" }).min(1, {
+        message: "Account name is required."
+    }),
+    icon: string({ required_error: "Icons is required" }).min(1, {
+        message: "Icons is required."
+    }),
+})
+export type CreateAccountValues = z.infer<typeof createAccountSchema>;

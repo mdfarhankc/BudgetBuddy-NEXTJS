@@ -9170,7 +9170,7 @@ export namespace Prisma {
     id?: string
     name: string
     icon: string
-    balance: number
+    balance?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAccountsInput
@@ -9181,7 +9181,7 @@ export namespace Prisma {
     id?: string
     name: string
     icon: string
-    balance: number
+    balance?: number
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9214,7 +9214,7 @@ export namespace Prisma {
     id?: string
     name: string
     icon: string
-    balance: number
+    balance?: number
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10522,7 +10522,7 @@ export namespace Prisma {
     id?: string
     name: string
     icon: string
-    balance: number
+    balance?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     transactions?: TransactionCreateNestedManyWithoutAccountInput
@@ -10532,7 +10532,7 @@ export namespace Prisma {
     id?: string
     name: string
     icon: string
-    balance: number
+    balance?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     transactions?: TransactionUncheckedCreateNestedManyWithoutAccountInput
@@ -11219,7 +11219,7 @@ export namespace Prisma {
     id?: string
     name: string
     icon: string
-    balance: number
+    balance?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAccountsInput
@@ -11229,7 +11229,7 @@ export namespace Prisma {
     id?: string
     name: string
     icon: string
-    balance: number
+    balance?: number
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11432,7 +11432,7 @@ export namespace Prisma {
     id?: string
     name: string
     icon: string
-    balance: number
+    balance?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
