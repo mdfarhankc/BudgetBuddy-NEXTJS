@@ -14,12 +14,19 @@ enum TransactionType {
   expense
 }
 
+enum Gender {
+  male
+  female
+}
+
 // Models
 model User {
   id             String @id @default(uuid())
   name           String
   email          String
   hashedPassword String
+  gender         Gender @default(male)
+  profilePic     String
 
   currencyId String
   currency   Currency @relation(fields: [currencyId], references: [id])

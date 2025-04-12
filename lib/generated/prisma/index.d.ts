@@ -55,11 +55,23 @@ export namespace $Enums {
 
 export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
 
+
+export const Gender: {
+  male: 'male',
+  female: 'female'
+};
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
 }
 
 export type TransactionType = $Enums.TransactionType
 
 export const TransactionType: typeof $Enums.TransactionType
+
+export type Gender = $Enums.Gender
+
+export const Gender: typeof $Enums.Gender
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1568,6 +1580,8 @@ export namespace Prisma {
     name: string | null
     email: string | null
     hashedPassword: string | null
+    gender: $Enums.Gender | null
+    profilePic: string | null
     currencyId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1578,6 +1592,8 @@ export namespace Prisma {
     name: string | null
     email: string | null
     hashedPassword: string | null
+    gender: $Enums.Gender | null
+    profilePic: string | null
     currencyId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1588,6 +1604,8 @@ export namespace Prisma {
     name: number
     email: number
     hashedPassword: number
+    gender: number
+    profilePic: number
     currencyId: number
     createdAt: number
     updatedAt: number
@@ -1600,6 +1618,8 @@ export namespace Prisma {
     name?: true
     email?: true
     hashedPassword?: true
+    gender?: true
+    profilePic?: true
     currencyId?: true
     createdAt?: true
     updatedAt?: true
@@ -1610,6 +1630,8 @@ export namespace Prisma {
     name?: true
     email?: true
     hashedPassword?: true
+    gender?: true
+    profilePic?: true
     currencyId?: true
     createdAt?: true
     updatedAt?: true
@@ -1620,6 +1642,8 @@ export namespace Prisma {
     name?: true
     email?: true
     hashedPassword?: true
+    gender?: true
+    profilePic?: true
     currencyId?: true
     createdAt?: true
     updatedAt?: true
@@ -1703,6 +1727,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender: $Enums.Gender
+    profilePic: string
     currencyId: string
     createdAt: Date
     updatedAt: Date
@@ -1730,6 +1756,8 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     hashedPassword?: boolean
+    gender?: boolean
+    profilePic?: boolean
     currencyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1746,6 +1774,8 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     hashedPassword?: boolean
+    gender?: boolean
+    profilePic?: boolean
     currencyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1757,6 +1787,8 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     hashedPassword?: boolean
+    gender?: boolean
+    profilePic?: boolean
     currencyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1768,12 +1800,14 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     hashedPassword?: boolean
+    gender?: boolean
+    profilePic?: boolean
     currencyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "hashedPassword" | "currencyId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "hashedPassword" | "gender" | "profilePic" | "currencyId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     currency?: boolean | CurrencyDefaultArgs<ExtArgs>
     categories?: boolean | User$categoriesArgs<ExtArgs>
@@ -1803,6 +1837,8 @@ export namespace Prisma {
       name: string
       email: string
       hashedPassword: string
+      gender: $Enums.Gender
+      profilePic: string
       currencyId: string
       createdAt: Date
       updatedAt: Date
@@ -2238,6 +2274,8 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly hashedPassword: FieldRef<"User", 'String'>
+    readonly gender: FieldRef<"User", 'Gender'>
+    readonly profilePic: FieldRef<"User", 'String'>
     readonly currencyId: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -8367,6 +8405,8 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     hashedPassword: 'hashedPassword',
+    gender: 'gender',
+    profilePic: 'profilePic',
     currencyId: 'currencyId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -8473,6 +8513,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Gender'
+   */
+  export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
+    
+
+
+  /**
+   * Reference to a field of type 'Gender[]'
+   */
+  export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -8539,6 +8593,8 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     hashedPassword?: StringFilter<"User"> | string
+    gender?: EnumGenderFilter<"User"> | $Enums.Gender
+    profilePic?: StringFilter<"User"> | string
     currencyId?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -8554,6 +8610,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     hashedPassword?: SortOrder
+    gender?: SortOrder
+    profilePic?: SortOrder
     currencyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8572,6 +8630,8 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
     hashedPassword?: StringFilter<"User"> | string
+    gender?: EnumGenderFilter<"User"> | $Enums.Gender
+    profilePic?: StringFilter<"User"> | string
     currencyId?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -8587,6 +8647,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     hashedPassword?: SortOrder
+    gender?: SortOrder
+    profilePic?: SortOrder
     currencyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8603,6 +8665,8 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     hashedPassword?: StringWithAggregatesFilter<"User"> | string
+    gender?: EnumGenderWithAggregatesFilter<"User"> | $Enums.Gender
+    profilePic?: StringWithAggregatesFilter<"User"> | string
     currencyId?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -8948,6 +9012,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     createdAt?: Date | string
     updatedAt?: Date | string
     currency: CurrencyCreateNestedOneWithoutUsersInput
@@ -8962,6 +9028,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     currencyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8976,6 +9044,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currency?: CurrencyUpdateOneRequiredWithoutUsersNestedInput
@@ -8990,6 +9060,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     currencyId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9004,6 +9076,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     currencyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9014,6 +9088,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9023,6 +9099,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     currencyId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9386,6 +9464,13 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type EnumGenderFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9447,6 +9532,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     hashedPassword?: SortOrder
+    gender?: SortOrder
+    profilePic?: SortOrder
     currencyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9457,6 +9544,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     hashedPassword?: SortOrder
+    gender?: SortOrder
+    profilePic?: SortOrder
     currencyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9467,6 +9556,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     hashedPassword?: SortOrder
+    gender?: SortOrder
+    profilePic?: SortOrder
     currencyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9488,6 +9579,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type EnumGenderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGenderFilter<$PrismaModel>
+    _max?: NestedEnumGenderFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -9810,6 +9911,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type EnumGenderFieldUpdateOperationsInput = {
+    set?: $Enums.Gender
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -10248,6 +10353,13 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedEnumGenderFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -10285,6 +10397,16 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumGenderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGenderFilter<$PrismaModel>
+    _max?: NestedEnumGenderFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10631,6 +10753,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: CategoryCreateNestedManyWithoutUserInput
@@ -10644,6 +10768,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutUserInput
@@ -10686,6 +10812,8 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     hashedPassword?: StringFilter<"User"> | string
+    gender?: EnumGenderFilter<"User"> | $Enums.Gender
+    profilePic?: StringFilter<"User"> | string
     currencyId?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -10696,6 +10824,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     createdAt?: Date | string
     updatedAt?: Date | string
     currency: CurrencyCreateNestedOneWithoutUsersInput
@@ -10709,6 +10839,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     currencyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10774,6 +10906,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currency?: CurrencyUpdateOneRequiredWithoutUsersNestedInput
@@ -10787,6 +10921,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     currencyId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10816,6 +10952,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     createdAt?: Date | string
     updatedAt?: Date | string
     currency: CurrencyCreateNestedOneWithoutUsersInput
@@ -10829,6 +10967,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     currencyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10894,6 +11034,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currency?: CurrencyUpdateOneRequiredWithoutUsersNestedInput
@@ -10907,6 +11049,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     currencyId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10936,6 +11080,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     createdAt?: Date | string
     updatedAt?: Date | string
     currency: CurrencyCreateNestedOneWithoutUsersInput
@@ -10949,6 +11095,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     currencyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11009,6 +11157,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currency?: CurrencyUpdateOneRequiredWithoutUsersNestedInput
@@ -11022,6 +11172,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     currencyId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11118,6 +11270,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     createdAt?: Date | string
     updatedAt?: Date | string
     currency: CurrencyCreateNestedOneWithoutUsersInput
@@ -11131,6 +11285,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     currencyId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11238,6 +11394,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currency?: CurrencyUpdateOneRequiredWithoutUsersNestedInput
@@ -11251,6 +11409,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     currencyId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11412,6 +11572,8 @@ export namespace Prisma {
     name: string
     email: string
     hashedPassword: string
+    gender?: $Enums.Gender
+    profilePic: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11421,6 +11583,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUpdateManyWithoutUserNestedInput
@@ -11434,6 +11598,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -11447,6 +11613,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    profilePic?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

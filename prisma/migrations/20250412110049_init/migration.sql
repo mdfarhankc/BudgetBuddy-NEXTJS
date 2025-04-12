@@ -1,12 +1,17 @@
 -- CreateEnum
 CREATE TYPE "TransactionType" AS ENUM ('income', 'expense');
 
+-- CreateEnum
+CREATE TYPE "Gender" AS ENUM ('male', 'female');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "hashedPassword" TEXT NOT NULL,
+    "gender" "Gender" NOT NULL DEFAULT 'male',
+    "profilePic" TEXT NOT NULL,
     "currencyId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

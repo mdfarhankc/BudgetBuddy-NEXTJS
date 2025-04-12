@@ -25,14 +25,18 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SignUp } from "../actions";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export default function SignUpForm() {
+  const router = useRouter();
   const form = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
+      gender: "male",
       confirmPassword: "",
     },
   });
@@ -42,6 +46,7 @@ export default function SignUpForm() {
       console.log(values);
       await SignUp(values);
       toast.success("User registered successfully!");
+      router.push("/sign-in");
     } catch (error) {
       console.error("Error in Signup: ", error);
       if (error instanceof Error) toast.error(error.message);
@@ -88,6 +93,36 @@ export default function SignUpForm() {
                         placeholder="johndoe@gmail.com"
                         {...field}
                       />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="gender"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Gender</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex space-x-4"
+                      >
+                        <FormItem className="flex gap-2">
+                          <FormControl>
+                            <RadioGroupItem value="male" id="male" />
+                          </FormControl>
+                          <FormLabel htmlFor="male">Male</FormLabel>
+                        </FormItem>
+                        <FormItem className="flex gap-2">
+                          <FormControl>
+                            <RadioGroupItem value="female" id="female" />
+                          </FormControl>
+                          <FormLabel htmlFor="female">Female</FormLabel>
+                        </FormItem>
+                      </RadioGroup>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

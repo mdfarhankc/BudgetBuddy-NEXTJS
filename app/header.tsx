@@ -1,10 +1,9 @@
 "use client";
 
 import Logo from "@/components/logo";
-import LogoutButton from "@/components/logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import UserButton from "@/components/user-button";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
@@ -17,14 +16,7 @@ export default function Header() {
         <Logo />
         <div className="flex items-center gap-4">
           {session?.user ? (
-            <>
-              <Button size={"sm"} asChild className="font-bold">
-                <Link href="/dashboard">
-                  Dashboard <ChevronRight />
-                </Link>
-              </Button>
-              <LogoutButton />
-            </>
+            <UserButton />
           ) : (
             <Button size={"sm"} asChild className="font-bold">
               <Link href="/sign-in">Login</Link>
