@@ -1,18 +1,35 @@
+"use client";
+
 import Logo from "@/components/logo";
+import LogoutButton from "@/components/logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
 export default function Header() {
+  const { data: session } = useSession();
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-7xl mx-auto container flex h-16 items-center justify-between">
         <Logo />
         <div className="flex items-center gap-4">
-          <Button asChild>
-            <Link href="/login">Login</Link>
-          </Button>
+          {session?.user ? (
+            <>
+              <Button size={"sm"} asChild className="font-bold">
+                <Link href="/dashboard">
+                  Dashboard <ChevronRight />
+                </Link>
+              </Button>
+              <LogoutButton />
+            </>
+          ) : (
+            <Button size={"sm"} asChild className="font-bold">
+              <Link href="/sign-in">Login</Link>
+            </Button>
+          )}
           <ThemeToggle />
         </div>
       </div>

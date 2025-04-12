@@ -8,9 +8,11 @@ export const getUserFromDb = async (email: string, password: string) => {
         });
         if (!user) return null;
 
-        const isPassMatch = await comparePassword(password, user.hashedPassword)
+        const isPassMatch = await comparePassword(password, user.hashedPassword);
         if (!isPassMatch) return null
-        return user;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { hashedPassword, ...userWithoutPassword } = user;
+        return userWithoutPassword;
     } catch (error) {
         console.error("Error in getUserFromDb: ", error)
         return null;
@@ -22,6 +24,6 @@ export async function hashPassword(password: string) {
     return bcrypt.hash(password, salt);
 }
 
-export async function comparePassword(passowrd: string, hash: string) {
-    return bcrypt.compare(passowrd, hash)
+export async function comparePassword(password: string, hash: string) {
+    return bcrypt.compare(password, hash)
 }
