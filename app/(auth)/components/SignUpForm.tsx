@@ -43,7 +43,6 @@ export default function SignUpForm() {
 
   const onSubmit = async (values: SignUpValues) => {
     try {
-      console.log(values);
       await SignUp(values);
       toast.success("User registered successfully!");
       router.push("/sign-in");
@@ -109,6 +108,7 @@ export default function SignUpForm() {
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                         className="flex space-x-4"
+                        disabled={form.formState.isSubmitting}
                       >
                         <FormItem className="flex gap-2">
                           <FormControl>

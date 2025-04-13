@@ -24,8 +24,11 @@ import { Input } from "@/components/ui/input";
 import { signInSchema, SignInValues } from "@/validations";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function SignInForm() {
+  const router = useRouter();
   const form = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -35,8 +38,26 @@ export default function SignInForm() {
   });
 
   const onSubmit = async (values: SignInValues) => {
-    console.log(values);
-    await signIn("credentials", values);
+    try {
+      const result = await signIn("credentials", {
+        ...values,
+        redirect: false,
+      });
+      if (result?.error) {
+        toast.error(
+          result.error === "CredentialsSignin"
+            ? "Invalid email or password."
+            : result.error
+        );
+      } else {
+        toast.success("Login successful!");
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.error("Error in Signin: ", error);
+      if (error instanceof Error) toast.error(error.message);
+      else toast.error("Something went wrong!");
+    }
   };
   return (
     <main className="max-w-7xl container mx-auto flex flex-1 items-center justify-center">

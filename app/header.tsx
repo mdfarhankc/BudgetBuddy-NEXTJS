@@ -1,7 +1,7 @@
 "use client";
 
 import Logo from "@/components/logo";
-import { ThemeToggle } from "@/components/theme-toggle";
+import ThemeToggle from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import UserButton from "@/components/user-button";
 import { useSession } from "next-auth/react";
@@ -10,8 +10,9 @@ import React from "react";
 
 export default function Header() {
   const { data: session } = useSession();
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/50 backdrop-blur">
       <div className="max-w-7xl mx-auto container flex h-16 items-center justify-between">
         <Logo />
         <div className="flex items-center gap-4">

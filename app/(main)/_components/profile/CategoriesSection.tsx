@@ -5,19 +5,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import prisma from "@/lib/prisma";
-import React from "react";
-import CreateAccountDialog from "./CreateAccountDialog";
-import AccountItem from "./AccountItem";
+import CreateCategoryDialog from "./CreateCategoryDialog";
+import CategoryItem from "./CategoryItem";
 import { Session } from "next-auth";
 
-export default async function AccountsSection({
+export default async function CategoriesSection({
   user,
 }: {
   user: Session["user"];
 }) {
-  const accounts = await prisma.account.findMany({
+  const categories = await prisma.category.findMany({
     where: {
       userId: user.id,
     },
@@ -27,23 +25,23 @@ export default async function AccountsSection({
       <CardHeader className="flex flex-col sm:flex-row items-center justify-between">
         <div>
           <CardTitle className="text-3xl tracking-tighter sm:text-left text-center">
-            {" - "}Accounts{" - "}
+            {" - "}Categories{" - "}
           </CardTitle>
           <CardDescription className="sm:text-left text-center">
-            Manage your accounts, see their balances here.
+            Manage your categories here.
           </CardDescription>
         </div>
-        <CreateAccountDialog />
+        <CreateCategoryDialog />
       </CardHeader>
       <CardContent>
-        {accounts.length === 0 ? (
+        {categories.length === 0 ? (
           <p className="text-center text-gray-500">
-            No accounts found. Create one to get started!
+            No categories found. Create one to get started!
           </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {accounts.map((account) => (
-              <AccountItem key={account.id} account={account} />
+            {categories.map((category) => (
+              <CategoryItem key={category.id} category={category} />
             ))}
           </div>
         )}

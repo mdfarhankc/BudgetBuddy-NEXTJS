@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import NextAuth from "next-auth";
-import { Currency } from "@/lib/generated/prisma";
+import { Currency } from "@/lib/prisma";
 
 declare module "next-auth" {
     interface Session {

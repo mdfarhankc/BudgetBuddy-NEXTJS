@@ -5,19 +5,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import prisma from "@/lib/prisma";
-import React from "react";
-import CreateAccountDialog from "./CreateAccountDialog";
-import AccountItem from "./AccountItem";
+import CreateTagDialog from "./CreateTagDialog";
+import TagItem from "./TagItem";
 import { Session } from "next-auth";
 
-export default async function AccountsSection({
-  user,
-}: {
-  user: Session["user"];
-}) {
-  const accounts = await prisma.account.findMany({
+export default async function TagsSection({ user }: { user: Session["user"] }) {
+  const tags = await prisma.tag.findMany({
     where: {
       userId: user.id,
     },
@@ -27,23 +21,23 @@ export default async function AccountsSection({
       <CardHeader className="flex flex-col sm:flex-row items-center justify-between">
         <div>
           <CardTitle className="text-3xl tracking-tighter sm:text-left text-center">
-            {" - "}Accounts{" - "}
+            {" - "}Tags{" - "}
           </CardTitle>
           <CardDescription className="sm:text-left text-center">
-            Manage your accounts, see their balances here.
+            Manage your tags here.
           </CardDescription>
         </div>
-        <CreateAccountDialog />
+        <CreateTagDialog />
       </CardHeader>
       <CardContent>
-        {accounts.length === 0 ? (
+        {tags.length === 0 ? (
           <p className="text-center text-gray-500">
-            No accounts found. Create one to get started!
+            No tags found. Create one to get started!
           </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {accounts.map((account) => (
-              <AccountItem key={account.id} account={account} />
+            {tags.map((tag) => (
+              <TagItem key={tag.id} tag={tag} />
             ))}
           </div>
         )}

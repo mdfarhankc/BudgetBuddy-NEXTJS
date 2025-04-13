@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { signInSchema } from "./validations";
 import { getUserFromDb } from "./services/auth";
-import { Currency } from "./lib/generated/prisma";
+import { Currency } from "./generated/prisma";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
