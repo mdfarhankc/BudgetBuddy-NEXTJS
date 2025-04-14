@@ -35,7 +35,7 @@ export default async function TagsSection({ user }: { user: Session["user"] }) {
             No tags found. Create one to get started!
           </p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="flex flex-wrap gap-3 items-center justify-center sm:items-start sm:justify-start">
             {tags.map((tag) => (
               <TagItem key={tag.id} tag={tag} />
             ))}
