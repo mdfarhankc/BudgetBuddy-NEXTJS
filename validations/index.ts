@@ -55,3 +55,17 @@ export const createTagSchema = object({
   }),
 });
 export type CreateTagValues = z.infer<typeof createTagSchema>;
+
+// --------------------- CATEGORY -----------------
+export const createCategorySchema = object({
+  name: string({ required_error: "Category name is required" }).min(1, {
+    message: "Category name is required.",
+  }),
+  icon: string({ required_error: "Icons is required" }).min(1, {
+    message: "Icons is required.",
+  }),
+  type: z.enum(["income", "expense"], {
+    message: "Type must be either 'income' or 'expense'.",
+  }),
+});
+export type CreateCategoryValues = z.infer<typeof createCategorySchema>;

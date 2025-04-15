@@ -2,7 +2,6 @@
 
 import { deleteAccountAction } from "../../_actions/profile";
 import { toast } from "sonner";
-import DeleteDialog from "./DeleteAccountDialog";
 import {
   Card,
   CardContent,
@@ -11,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Account } from "@/generated/prisma";
+import DeleteDialog from "@/components/common/DeleteDialog";
 
 export default function AccountItem({ account }: { account: Account }) {
   const handleDelete = async () => {
@@ -45,7 +45,7 @@ export default function AccountItem({ account }: { account: Account }) {
         Balance: {account.balance}
       </CardContent>
       <CardFooter>
-        <DeleteDialog onDelete={handleDelete} />
+        <DeleteDialog title="account" onDelete={handleDelete} />
       </CardFooter>
     </Card>
   );

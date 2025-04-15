@@ -8,8 +8,9 @@ import { deleteTagAction } from "../../_actions/profile";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import DeleteDialog from "@/components/common/DeleteDialog";
+import { cn } from "@/lib/utils";
 
-export default function TagItem({ tag }: { tag: Tag }) {
+export default function TagItem({ tag, index }: { tag: Tag; index: number }) {
   const handleDelete = async () => {
     try {
       toast.loading("Tag deleting ...", {
@@ -31,11 +32,26 @@ export default function TagItem({ tag }: { tag: Tag }) {
     }
   };
 
+  const badgeColors = [
+    "bg-red-500/10 hover:bg-red-500/20 text-red-500",
+    "bg-green-500/10 hover:bg-green-500/20 text-green-500",
+    "bg-blue-500/10 hover:bg-blue-500/20 text-blue-500",
+    "bg-white/10 hover:bg-white/20 text-white",
+    "bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-500",
+    "bg-purple-500/10 hover:bg-purple-500/20 text-purple-500",
+    "bg-pink-500/10 hover:bg-pink-500/20 text-pink-500",
+    "bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-500",
+    "bg-orange-500/10 hover:bg-orange-500/20 text-orange-500",
+    "bg-gray-500/10 hover:bg-gray-500/20 text-gray-500",
+  ];
+
+  const badgeColor = () => {
+    return badgeColors[index % badgeColors.length];
+  };
+
+
   return (
-    <Badge
-      className="flex items-center gap-2"
-      onClick={(e) => e.stopPropagation()}
-    >
+    <Badge className={cn("flex items-center gap-2", badgeColor())}>
       {tag.name}
       <DeleteDialog
         onDelete={handleDelete}

@@ -10,11 +10,12 @@ import React from "react";
 
 export default function Header() {
   const { data: session } = useSession();
+  const href = session?.user ? "/dashboard" : "/";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/50 backdrop-blur">
       <div className="max-w-7xl mx-auto container flex h-16 items-center justify-between">
-        <Logo />
+        <Logo href={href} />
         <div className="flex items-center gap-4">
           {session?.user ? (
             <UserButton />

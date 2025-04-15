@@ -5,17 +5,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import prisma from "@/lib/prisma";
 import CreateTagDialog from "./CreateTagDialog";
-import TagItem from "./TagItem";
-import { Session } from "next-auth";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default async function TagsSection({ user }: { user: Session["user"] }) {
-  const tags = await prisma.tag.findMany({
-    where: {
-      userId: user.id,
-    },
-  });
+export default async function TagsSectionSkeleton() {
   return (
     <Card className="w-2xs sm:w-xl md:w-3xl lg:w-5xl max-w-7xl mx-auto">
       <CardHeader className="flex flex-col sm:flex-row items-center justify-between">
@@ -30,17 +23,14 @@ export default async function TagsSection({ user }: { user: Session["user"] }) {
         <CreateTagDialog />
       </CardHeader>
       <CardContent>
-        {tags.length === 0 ? (
-          <p className="text-center text-gray-500">
-            No tags found. Create one to get started!
-          </p>
-        ) : (
-          <div className="flex flex-wrap gap-3 items-center justify-center sm:items-start sm:justify-start">
-            {tags.map((tag, index) => (
-              <TagItem key={tag.id} tag={tag} index={index} />
-            ))}
-          </div>
-        )}
+        <div className="flex flex-wrap gap-3 items-center justify-center sm:items-start sm:justify-start">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <Skeleton
+              key={index}
+              className="h-[40px] w-[85px] rounded-md flex items-center justify-center"
+            />
+          ))}
+        </div>
       </CardContent>
     </Card>
   );

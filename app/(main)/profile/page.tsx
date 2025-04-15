@@ -9,6 +9,8 @@ import ProfileUserInfoSkeleton from "../_components/profile/ProfileUserInfoSkele
 import TagsSection from "../_components/profile/TagsSection";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import TagsSectionSkeleton from "../_components/profile/TagsSectionSkeleton";
+import CategoriesSectionSkeleton from "../_components/profile/CategoriesSectionSkeleton";
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -41,10 +43,14 @@ export default async function ProfilePage() {
             </Suspense>
           </TabsContent>
           <TabsContent value="category">
-            <CategoriesSection user={session.user} />
+            <Suspense fallback={<CategoriesSectionSkeleton />}>
+              <CategoriesSection user={session.user} />
+            </Suspense>
           </TabsContent>
           <TabsContent value="tag">
-            <TagsSection user={session.user} />
+            <Suspense fallback={<TagsSectionSkeleton />}>
+              <TagsSection user={session.user} />
+            </Suspense>
           </TabsContent>
         </Tabs>
       </section>

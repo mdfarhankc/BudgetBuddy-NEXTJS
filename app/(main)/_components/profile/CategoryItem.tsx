@@ -3,7 +3,7 @@
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Category } from "@/generated/prisma";
 import { toast } from "sonner";
-import DeleteDialog from "./DeleteAccountDialog";
+import DeleteDialog from "@/components/common/DeleteDialog";
 import { deleteCategoryAction } from "../../_actions/profile";
 
 export default function CategoryItem({ category }: { category: Category }) {
@@ -36,7 +36,7 @@ export default function CategoryItem({ category }: { category: Category }) {
         </CardTitle>
       </CardHeader>
       <CardFooter>
-        <DeleteDialog onDelete={handleDelete} />
+        <DeleteDialog title="category" onDelete={handleDelete} />
       </CardFooter>
     </Card>
   );

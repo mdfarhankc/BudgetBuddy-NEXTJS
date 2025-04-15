@@ -5,6 +5,8 @@ import prisma from "@/lib/prisma";
 import {
   createAccountSchema,
   CreateAccountValues,
+  createCategorySchema,
+  CreateCategoryValues,
   createTagSchema,
   CreateTagValues,
 } from "@/validations";
@@ -57,6 +59,33 @@ export const deleteAccountAction = async (accountId: string) => {
 };
 
 // --------- CATEGORY --------------------
+export const createCategoryAction = async (values: CreateCategoryValues) => {
+  const parsedBody = createCategorySchema.safeParse(values);
+  if (!parsedBody.success) {
+    throw new Error("Bad request!");
+  }
+
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/sign-in");
+  }
+
+  const { name, icon, type } = parsedBody.data;
+  const newCategory = await prisma.category.create({
+    data: {
+      name,
+      icon,
+      type,
+      user: {
+        connect: { id: session.user.id },
+      },
+    },
+  });
+
+  revalidatePath("/dashboard");
+  revalidatePath("/profile");
+  return newCategory;
+};
 
 export const deleteCategoryAction = async (categoryId: string) => {
   const session = await auth();
